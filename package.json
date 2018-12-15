@@ -1,0 +1,15 @@
+{
+  "name": "phase_calc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./app/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "BenJC",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^3.0.11"
+  }
+}
