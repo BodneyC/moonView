@@ -1,5 +1,5 @@
 :root {
-    --moon-size: 200px;
+    --moon-rat: 50%;
 }
 
 * {
@@ -19,11 +19,12 @@
 }
 
 #moon {
-    display: block;
     margin-left: auto;
     margin-right: auto;
-    background-color: red;
-    border-radius: var(--moon-size)/var(--moon-size);
-    width: var(--moon-size);
-    height: var(--moon-size);
+    background-image: linear-gradient(110deg, rgba(154,151,121,1) 0%,rgba(125,185,232,0) 100%), url('../assets/moon.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: var(--moon-rat);
+    width: var(--moon-rat);
+    padding-top: var(--moon-rat);
 }
