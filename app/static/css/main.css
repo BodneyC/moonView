@@ -1,0 +1,29 @@
+:root {
+    --moon-size: 200px;
+}
+
+* {
+    background: black;
+}
+
+#content {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#moon {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: red;
+    border-radius: var(--moon-size)/var(--moon-size);
+    width: var(--moon-size);
+    height: var(--moon-size);
+}
