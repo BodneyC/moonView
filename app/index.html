@@ -3,16 +3,18 @@
 	<head>
 		<title>Phase Calc</title>
 		<meta charset="utf-8">
-		<!-- Stylesheets -->
 		<link rel="stylesheet" href="./static/css/main.css">
+		<script type="text/javascript" src="../node_modules/paper/dist/paper-full.js"></script>
+		<script type="text/paperscript" src="./static/scripts/paperMoon.js" canvas="moon"></script>
 	</head>
 	<body>
-        <div id="content">
-            <div id="middle">
-                <div id="moon"> </div>
-            </div>
-        </div>
+        <!-- <div id="content">
+            <div id="middle"> -->
+				<canvas id="moon" resize></canvas>
+				<!--<img id="moonImg" src="./static/assets/fullMoon.png">-->
+            <!-- </div>
+        </div> -->
 		<!-- Scripts -->
-		<script src="./static/scripts/phaseCalc.js"></script>
+		<!--<script src="./static/scripts/phaseCalc.js"></script>-->
 	</body>
 </html>

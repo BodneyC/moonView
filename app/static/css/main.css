@@ -6,6 +6,12 @@
     background: black;
 }
 
+html,
+body {
+    margin: 0;
+    overflow: hidden;
+    height: 100%;
+}
 #content {
     display: table;
     position: absolute;
@@ -15,16 +21,18 @@
 
 #middle {
     display: table-cell;
+    width: var(--moon-rat);
+    height: var(--moon-rat);
     vertical-align: middle;
 }
 
-#moon {
+#moonImg {
+    display: block;
     margin-left: auto;
     margin-right: auto;
-    background-image: linear-gradient(110deg, rgba(154,151,121,1) 0%,rgba(125,185,232,0) 100%), url('../assets/moon.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: var(--moon-rat);
-    width: var(--moon-rat);
-    padding-top: var(--moon-rat);
+}
+
+canvas[resize] {
+    width: 100%;
+    height: 100%;
 }

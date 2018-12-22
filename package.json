@@ -10,6 +10,9 @@
   "author": "BenJC",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^3.0.11"
+    "electron": "^3.0.13"
+  },
+  "dependencies": {
+    "paper": "^0.12.0"
   }
 }
