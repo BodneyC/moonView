@@ -1,5 +1,5 @@
 // Global vars
-var moonInfo = require(__dirname + '/static/scripts/phaseCalc.js');
+var moonInfo = require(__dirname + '/static/scripts/moonView');
 console.log(moonInfo)
 var widthMid = view.size.width / 2;
 var heightMid = view.size.height / 2;

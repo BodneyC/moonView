@@ -1,5 +1,6 @@
 var lune = require('lune');
 var currentPhase = lune.phase();
+
 function retMoonName(phaseNum) {
     switch(phaseNum) {
         case(0):
