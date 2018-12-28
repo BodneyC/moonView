@@ -56,12 +56,9 @@ function onMouseMove(event) {
 	curve1.handle1.y = deltaX55 - ((cirLen - Math.abs(deltaX55)) * 0.12);
 	curve2.handle2.y = -curve1.handle1.y;
 	
-	var lSeg = {
-		"first": crescent.segments[0],
-		"last": crescent.segments.slice(-1)[0]
-	}
-	lSeg["first"].point.x = point.x
-	lSeg["last"].point.x = point.x
+	crescent.segments[0].point.x = 
+		crescent.segments.slice(-1)[0].point.x = 
+		point.x;
 }
 
 function setCrescent() {
