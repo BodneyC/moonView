@@ -1,33 +1,3 @@
-/*function strToDate(dateString) {
-    // Check dateString matches dd/mm/YYYY
-    if(/^\d{2}\/\d{2}\/\d{4}$/.test(dateString)) {
-        date = new Date()
-        date.setDay(dateString.substr(0, 2))
-        date.setMonth(dateString.substr(4, 6))
-        date.setFullYear(dateString.substr(7, 11))
-        return date
-    }
-    return null
-}*/
-
-/*function setMoonPhase(daysIntoCycle) {
-    const moonEleStyle = document.getElementById('moon').style
-
-    //moonEleStyle.backgroundImage = "url(__dirname + '/static/assests/newMoon.png')"
-
-
-    const upper = percent + 3 > 100 ? 100 : percent + 3
-    const dir = percent > 50 ? 270 : 90
-
-    moonEleStyle.backgroundImage = "linear-gradient( \
-        " + dir + "deg, \
-        rgba(60, 60, 48, 1) 0%, \
-        rgba(136, 136, 107, 0.7) " + percent + "%, \
-        rgba(136, 136, 107, 0.2) " + upper + "%, \
-        rgba(245, 241, 191, 0) 100% \
-        )"
-}*/
-
 function getJulian(date) {
     const daysInYear = 362.25
     
@@ -81,7 +51,4 @@ function retMoonName(phaseNum) {
             break;
     const phaseNum = i
     const moonImgName = retMoonName(phaseNum)
-    document.getElementById('moonImg').src = __dirname + '/static/assets/' + moonImgName
-
-    console.log(daysIntoCycle, percent)
 })()
