@@ -1,4 +1,6 @@
 // Global vars
+var moonInfo = require(__dirname + '/static/scripts/phaseCalc.js');
+console.log(moonInfo)
 var widthMid = view.size.width / 2;
 var heightMid = view.size.height / 2;
 var cirLen = widthMid / 2;
