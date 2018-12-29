@@ -1,5 +1,5 @@
-var lune = require('lune');
-var currentPhase = lune.phase();
+var lune = require('lune')
+var currentPhase = lune.phase()
 
 function retMoonName(phaseNum) {
     switch(phaseNum) {
@@ -22,7 +22,7 @@ function retMoonName(phaseNum) {
     }
 }
 
-const moonName = retMoonName(parseInt(currentPhase.phase * 8));
+const moonName = retMoonName(parseInt(currentPhase.phase * 8))
 
 module.exports = {
     currentPhase,
