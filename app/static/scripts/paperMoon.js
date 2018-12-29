@@ -1,5 +1,8 @@
-// Global vars
+// Module-scoped vars
 var moonInfo = require(__dirname + '/static/scripts/moonView')
+
+var moonCol = '#f7f7a3'
+var crescentCol = '#c4c497'
 
 var handleScale = 0.52
 var widthMid = view.size.width / 2
@@ -9,17 +12,17 @@ var moon = new Path.Circle({
 	center: view.center,
 	radius: cirLen
 })
-moon.fillColor = '#f7f7a3'
+moon.fillColor = moonCol
 var handleLen = cirLen * handleScale
 var vector = new Point({
 	angle: 90,
 	length: handleLen 
 })
 var crescent = new Path()
-crescent.fillColor = '#c4c479'
+crescent.fillColor = crescentCol
 
 // Functionised for onResize()
-function draw() {
+function placeCircles() {
 	widthMid = view.size.width / 2
 	heightMid = view.size.height / 2
 
@@ -53,15 +56,10 @@ function draw() {
 	crescent.fullySelected = false
 }
 
-function onMouseMove(event) {
-	var point = event.point.clone()
+function setCrescentCurve(xVal) {
+	xVal = widthMid - xVal
 
-	if(point.x > widthMid)
-		point.x = widthMid
-	if(point.x < widthMid - cirLen)
-		point.x = widthMid - cirLen
-	
-	var delta = (point - view.center).x
+	var delta = xVal - view.center.x
 	var deltaX55 = delta * handleScale
 
 	var curve = crescent.curves
@@ -76,10 +74,10 @@ function onMouseMove(event) {
 	
 	crescent.segments[0].point.x = 
 		crescent.segments.slice(-1)[0].point.x = 
-		point.x
+		xVal
 }
 
-function setCrescent() {
+function setCrescentLocation() {
 	for(var i = 0; i < 4; i++) {
 		crescent.segments[i].point.x = moon.segments[i].point.x
 		crescent.segments[i].point.y = moon.segments[i].point.y
@@ -88,14 +86,43 @@ function setCrescent() {
 	crescent.segments[4].point.y = moon.segments[0].point.y
 }
 
-function onResize(event) {
-	draw()
-	moon.position = view.center
-	setCrescent()
+function getPercentAndQuarter(percent) {
+	percent *= 4
+	var quarter = parseInt(percent)
+	percent -= quarter
+
+	if(quarter == 4) // 4.0, i.e. full moon
+		quarter = 0
+
+	return {
+		quarter: quarter,
+		percent: percent
+	}
 }
 
-// Non-function code
-// NOTE: draw() must be before onMouseMove()
+function setCrescentRotateAndColors(info) {
+	if(info.quarter == 0 || info.quarter == 2)
+		crescent.rotate(180, view.center)
+	if(info.quarter == 1 || info.quarter == 2) {
+		moon.fillColor = crescentCol
+		crescent.fillColor = moonCol
+	}
+	
+}
+
+function draw() {
+	placeCircles()
+	moon.position = view.center
+	setCrescentLocation()
+	var quarterPercent = getPercentAndQuarter(moonInfo.currentPhase.phase)
+
+	// NOTE: Set curve before rotating (and rotate around view.center)
+	setCrescentCurve(quarterPercent.percent * cirLen)
+	setCrescentRotateAndColors(quarterPercent)
+}
+
+function onResize(event) {
+	draw();
+}
+
 draw()
-// Call onMouseMove once to correctly position the text items:
-onMouseMove({ point: view.center - vector.rotate(-90) })
