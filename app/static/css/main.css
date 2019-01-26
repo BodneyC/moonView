@@ -1,39 +1,34 @@
 :root {
     --moon-rat: 50%;
 }
-
 * {
-    background: black;
+    background: rgb(46, 47, 53);
 }
-
 html,
 body {
     margin: 0;
     overflow: hidden;
-    height: 100%;
+    height: 100vh;
 }
-
-#content {
-    display: table;
-    position: absolute;
-    height: 100%;
+.box {
+    background-color: #ffffff;
+    position: fixed;
+    border-radius: 50%;
+}
+.moon {
+    position: fixed;
     width: 100%;
+    height: 100%;
 }
-
-#middle {
-    display: table-cell;
-    width: var(--moon-rat);
-    height: var(--moon-rat);
-    vertical-align: middle;
-}
-
 #moonImg {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
-
 canvas[resize] {
     width: 100%;
     height: 100%;
+}
+#moontitle {
+    color: white;
 }

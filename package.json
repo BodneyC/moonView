@@ -9,7 +9,7 @@
   "author": "BenJC",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^3.0.13"
+    "electron": "^3.1.2"
   },
   "dependencies": {
     "lune": "^0.4.0",
