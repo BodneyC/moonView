@@ -10,13 +10,8 @@ body {
     overflow: hidden;
     height: 100vh;
 }
-.box {
-    background-color: #ffffff;
-    position: fixed;
-    border-radius: 50%;
-}
 .moon {
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 100%;
 }
@@ -30,5 +25,10 @@ canvas[resize] {
     height: 100%;
 }
 #moontitle {
+    position: absolute;
+    width: 100vh;
+    text-align: center;
+    font-family: Open Sans;
+
     color: white;
 }

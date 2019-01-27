@@ -1,8 +1,9 @@
 // Module-scoped vars
 var moonInfo = require(__dirname + '/static/scripts/moonView')
+console.log(moonInfo)
 
-var moonCol = '#f7f7a3'
-var crescentCol = '#c4c497'
+var moonCol = '#e0dfa1'
+var crescentCol = '#6d6d5e'
 
 var handleScale = 0.55
 var widthMid = view.size.width / 2
@@ -101,23 +102,27 @@ function getPercentAndQuarter(percent) {
 	}
 }
 
-function setCrescentRotateAndColors(info) {
+function setCrescentRotateAndColors(info, angle) {
 	if(info.quarter == 0 || info.quarter == 2)
-		crescent.rotate(180 + 23.5, view.center)
+		crescent.rotate(180 - angle, view.center)
+	else
+		crescent.rotate(angle, view.center)
 	if(info.quarter == 1 || info.quarter == 2) {
 		moon.fillColor = crescentCol
 		crescent.fillColor = moonCol
 	}
 }
 
+//------------------------------------- Stars
+
 var n_stars = view.size.width / 10
 var max_radius = 3
 var stars = []
 
 for(var i = 0; i < n_stars; i++)
-	stars.push(return_star())
+	stars.push(returnStar())
 
-function return_star() {
+function returnStar() {
 	return new Path.Circle({
 			center: new Point(
 				Math.floor((Math.random() * view.size.width) + 1),
@@ -128,29 +133,59 @@ function return_star() {
 		})
 }
 
+function getMoonRotationAngle(phase) {
+	return (phase * 47) - 23.5
+}
+
+//------------------------------------- Text
+
+var moonTitle = new PointText(new Point(widthMid, (heightMid - cirLen) / 2))
+moonTitle.justification = 'center'
+moonTitle.fillColor = 'white'
+moonTitle.fontSize = view.size.width * 0.04
+moonTitle.content = moonInfo.moonName
+var moonInfoText = new PointText(new Point(widthMid, heightMid + cirLen + (heightMid - cirLen) / 2))
+moonInfoText.justification = 'center'
+moonInfoText.fillColor = 'white'
+moonInfoText.fontSize = view.size.width * 0.025
+moonInfoText.content = 'Age: ' + Math.round(moonInfo.currentPhase.age) + ' days\nIllumination: ' + Math.round(moonInfo.currentPhase.illuminated * 100) + '%'
+
+function positionText() {
+	moonTitle.fontSize = view.size.width * 0.04
+	moonTitle.position = new Point(widthMid, (heightMid - cirLen) / 2)
+	moonInfoText.fontSize = view.size.width * 0.025
+	moonInfoText.position = new Point(widthMid, heightMid + cirLen + (heightMid - cirLen) / 2)
+}
+
+//------------------------------------- Drawing
+
 function draw() {
 	placeCircles()
 	setCrescentLocation()
 	var quarterPercent = getPercentAndQuarter(moonInfo.currentPhase.illuminated)
+	var angle = getMoonRotationAngle(moonInfo.currentPhase.phase)
 
 	setCrescentCurve(quarterPercent.percent * cirLen)
-	setCrescentRotateAndColors(quarterPercent)
+	setCrescentRotateAndColors(quarterPercent, angle)
 
 	moon.bringToFront()
 	crescent.bringToFront()
+	moonTitle.bringToFront()
 }
-function redraw_stars() {
+
+function redrawStars() {
 	for(var i = 0; i < n_stars; i++)
 		stars[i].remove()
 	stars = []
 	n_stars = view.size.width / 10
 	for(i = 0; i < n_stars; i++)
-		stars.push(return_star())
+		stars.push(returnStar())
 }
 
 function onResize(event) {
-	redraw_stars()
+	redrawStars()
 	draw()
+	positionText()
 }
 
 draw()
