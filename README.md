@@ -3,6 +3,10 @@ Moon View
 
 [Electron](https://electronjs.org/) app which shows the current phase of the moon (and possibly even more to come...)
 
+### Screenshot
+
+![screenshot](readme_images/screenshot.png)
+
 ### Description/Purpose
 
 The real purpose of this app is to get some practice in with Electron (and therefore NodeJS).
