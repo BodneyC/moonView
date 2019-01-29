@@ -4,7 +4,8 @@
   "description": "",
   "main": "./app/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+	"ep-lin": "electron-packager . --overwrite --arch x64 --platform linux --out release-builds"
   },
   "author": "BenJC",
   "license": "ISC",
@@ -15,5 +16,12 @@
     "dateformat": "^3.0.3",
     "lune": "^0.4.0",
     "paper": "^0.12.0"
+  },
+  "pkg": {
+    "assets": "static/css/main.css",
+    "scripts": "static/scripts/*.js",
+    "targets": [
+      "node10"
+    ]
   }
 }
