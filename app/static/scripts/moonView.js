@@ -1,4 +1,5 @@
 var lune = require('lune')
+var dateFormat = require('dateformat');
 var currentPhase = lune.phase()
 
 function retMoonName(phaseNum) {
@@ -24,7 +25,10 @@ function retMoonName(phaseNum) {
 
 const moonName = retMoonName(parseInt(currentPhase.phase * 8))
 
+var dateString = dateFormat(new Date(), "dS mmmm, yyyy, HH:MM:ss tt")
+
 module.exports = {
     currentPhase,
-    moonName
+    moonName,
+    dateString
 }

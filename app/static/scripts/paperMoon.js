@@ -69,12 +69,13 @@ function setCrescentCurve(xVal) {
 	
 	curve[0].handle2.x = curve[3].handle1.x = deltaX55
 	
-	curve[0].handle1.y = deltaX55 - ((cirLen - Math.abs(deltaX55)) * 0.12)
+	curve[0].handle1.y = curve[1].handle2.y - deltaX55
+	// curve[0].handle1.y = deltaX55 - ((cirLen - Math.abs(deltaX55)) * 0.2)
 	curve[3].handle2.y = -curve[0].handle1.y
 	
 	crescent.segments[0].point.x = 
-		crescent.segments.slice(-1)[0].point.x = 
-		xVal
+		crescent.segments.slice(-1)[0].point.x = xVal
+	// crescent.fullySelected = true
 }
 
 function setCrescentLocation() {
@@ -104,13 +105,15 @@ function getPercentAndQuarter(percent) {
 
 function setCrescentRotateAndColors(info, angle) {
 	if(info.quarter == 0 || info.quarter == 2)
-		crescent.rotate(180 - angle, view.center)
-	else
-		crescent.rotate(angle, view.center)
+		crescent.rotate(180, view.center)
 	if(info.quarter == 1 || info.quarter == 2) {
 		moon.fillColor = crescentCol
 		crescent.fillColor = moonCol
 	}
+	if(info.quarter == 0)
+		crescent.rotate(angle, view.center)
+	else if (info.quarter != 1)
+		crescent.rotate(-angle, view.center)
 }
 
 //------------------------------------- Stars
@@ -143,7 +146,12 @@ var moonTitle = new PointText(new Point(widthMid, (heightMid - cirLen) / 2))
 moonTitle.justification = 'center'
 moonTitle.fillColor = 'white'
 moonTitle.fontSize = view.size.width * 0.04
-moonTitle.content = moonInfo.moonName
+moonTitle.content = moonInfo.moonName + '\n'
+var dateString = new PointText(new Point(widthMid, ((heightMid - cirLen) * 1.2) / 2))
+dateString.justification = 'center'
+dateString.fillColor = 'white'
+dateString.fontSize = view.size.width * 0.03
+dateString.content = '\n' + moonInfo.dateString
 var moonInfoText = new PointText(new Point(widthMid, heightMid + cirLen + (heightMid - cirLen) / 2))
 moonInfoText.justification = 'center'
 moonInfoText.fillColor = 'white'
@@ -153,6 +161,8 @@ moonInfoText.content = 'Age: ' + Math.round(moonInfo.currentPhase.age) + ' days\
 function positionText() {
 	moonTitle.fontSize = view.size.width * 0.04
 	moonTitle.position = new Point(widthMid, (heightMid - cirLen) / 2)
+	dateString.fontSize = view.size.width * 0.03
+	dateString.position = new Point(widthMid, ((heightMid - cirLen) * 1.2) / 2)
 	moonInfoText.fontSize = view.size.width * 0.025
 	moonInfoText.position = new Point(widthMid, heightMid + cirLen + (heightMid - cirLen) / 2)
 }
